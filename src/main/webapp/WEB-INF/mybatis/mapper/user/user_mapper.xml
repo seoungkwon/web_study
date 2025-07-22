@@ -2,11 +2,11 @@
 <!DOCTYPE mapper PUBLIC
 		   "-//mybatis.org//DTD Mapper 3.0//EN" 
 		   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-		   
+
 
 <mapper namespace="user_mapper">
-	
-	
+
+
 	<insert id="saveUser" parameterType="User">
 		INSERT INTO T_USER VALUES (
 				 #{id},
@@ -15,5 +15,8 @@
 				 #{userType} )
 	</insert>
 
-	
+	<select id="findUserList" resultType="User">
+		SELECT * FROM T_USER
+	</select>
+
 </mapper>

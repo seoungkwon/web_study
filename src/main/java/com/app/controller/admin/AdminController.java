@@ -18,7 +18,7 @@ public class AdminController {
 
 	@Autowired
 	RoomService roomService;
-	
+
 	@Autowired
 	UserService userService;
 
@@ -56,20 +56,20 @@ public class AdminController {
 
 		return "admin/rooms";		
 	}
-	
-	
+
+
 	//관리자가 사용자계정관리 -> 사용자 계정을 추가
 	@GetMapping("/admin/users/add")
 	public String addUser() {
 		//화면연결
 		return "admin/addUser";
 	}
-	
+
 	@PostMapping("/admin/users/add")
 	public String addUserAction(User user) {
-		
+
 		System.out.println(user);
-		
+
 		//관리자가 사용자 계정을 추가!!!
 		//사용자 계정이니까 userType "CUS" 여야 한다!! 전제조건! 로직!
 
@@ -79,14 +79,24 @@ public class AdminController {
 		//저장 처리 진행
 		int result = userService.saveUser(user);
 		*/
-		
+
 		//Customer 사용자 저장용 서비스 메소드 활용
 		int result = userService.saveCustomerUser(user);
-		
-		
+
+
 		//if(result > 0 ) //정상 저장 처리
-		
+
 		return "admin/addUser";
 	}
+
+	@GetMapping("/admin/users")
+	public String users(Model model) {
+		List<User> userList = userService.findUserList();
+		
+		model.addAttribute("userList", userList);
+		
+		return "admin/users";
+	}
+	
 	
 }
