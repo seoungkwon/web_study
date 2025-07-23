@@ -65,9 +65,17 @@ public class RoomServiceImpl implements RoomService {
 
 	@Override
 	public int removeRoom(int roomId) {
-		
+
 		int result = roomDAO.removeRoom(roomId);
-		
+
+		return result;
+	}
+
+	@Override
+	public int modifyRoom(Room room) {
+
+		int result = roomDAO.modifyRoom(room);
+
 		return result;
 	}
 

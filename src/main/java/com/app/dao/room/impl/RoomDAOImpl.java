@@ -57,6 +57,15 @@ public class RoomDAOImpl implements RoomDAO {
 
 		int result = sqlSessionTemplate.delete("room_mapper.removeRoom", roomId);
 		//delete 적용된 행의 수 
+
+		return result;
+	}
+
+	@Override
+	public int modifyRoom(Room room) {
+		
+		
+		int result = sqlSessionTemplate.update("room_mapper.modifyRoom", room);
 		
 		return result;
 	}
