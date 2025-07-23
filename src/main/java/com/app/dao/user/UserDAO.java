@@ -7,6 +7,8 @@ import com.app.dto.user.User;
 public interface UserDAO {
 
 	public int saveUser(User user); 
-	
+
 	public List<User> findUserList();
+	
+	public User findUserById(String id);
 }
