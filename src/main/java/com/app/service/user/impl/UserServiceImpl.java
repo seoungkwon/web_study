@@ -97,4 +97,20 @@ public class UserServiceImpl implements UserService {
 
 		return loginUser; //조회:O 객체, 조회:X null
 	}
+
+	@Override
+	public int updateUserPassword(String id, String newPw) {
+		
+		return 0;
+	}
+
+	@Override
+	public int modifyUserPw(User user) {
+		
+		int result = userDAO.modifyUserPw(user);
+		
+		return result;
+	}
+
+	
 }

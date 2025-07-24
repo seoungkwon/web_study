@@ -11,7 +11,7 @@
 <body>
 	<h1>메인 페이지</h1>
 
-	<button onClick="location.href='/customer/signup'">회원가입</button>
+	
 	<c:if test="${loginUserId == null}">
 		<button onClick="location.href='/customer/signup'">회원가입</button>
 		<button onClick="location.href='/customer/signin'">로그인</button>
