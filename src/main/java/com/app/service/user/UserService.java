@@ -21,4 +21,6 @@ public interface UserService {
 	public int updateUserPassword(String id, String newPw);
 	
 	public int modifyUserPw(User user);
+	
+	public int modifyUser(User user);
 }
