@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.app.dto.room.Room;
+import com.app.dto.room.RoomSearchCondition;
 import com.app.dto.user.User;
 import com.app.dto.user.UserSearchCondition;
 import com.app.service.room.RoomService;
@@ -50,13 +51,19 @@ public class AdminController {
 
 	//관리자가 객실 관리하면서 객실 목록 확인
 	@GetMapping("/admin/rooms")
-	public String rooms(Model model) {
+//	public String rooms(Model model) {
+	public String rooms(Model model, RoomSearchCondition roomSearchCondition) {
+		
+		System.out.println(roomSearchCondition);
 
 		//rooms 페이지에 보여줄 정보
 		// DB 에서 조회
-		List<Room> roomList = roomService.findRoomList();
+	//	List<Room> roomList = roomService.findRoomList();
+		//List<Room> roomList = roomService.findRoomList();
+		List<Room> roomList = roomService.findRoomListBySearchCondition(roomSearchCondition);
 
 		model.addAttribute("roomList", roomList);
+		model.addAttribute("roomSearchCondition", roomSearchCondition);
 
 		return "admin/rooms";		
 	}
@@ -158,16 +165,14 @@ public class AdminController {
 	}
 
 	@GetMapping("/admin/users")
-	//public String users(Model model) {
-		//List<User> userList = userService.findUserList();
 	public String users(Model model, UserSearchCondition userSearchCondition) {
-		
+
 		System.out.println(userSearchCondition);
-		
-		
+
+
 		//if 검색조건이 있으면 -> 조건 검색
 		//   검색조건이 없으면 -> 전체 검색
-		
+
 		//List<User> userList = userService.findUserList(); //전체 조회
 		List<User> userList = userService.findUserListBySearchCondition(userSearchCondition); //전체 조회
 
