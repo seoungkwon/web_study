@@ -73,6 +73,13 @@ https://mvnrepository.com/artifact/javax.servlet.jsp/javax.servlet.jsp-api -->
 			<artifactId>spring-jdbc</artifactId>
 			<version>5.3.27</version>
 		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple -->
+		<dependency>
+		    <groupId>com.googlecode.json-simple</groupId>
+		    <artifactId>json-simple</artifactId>
+		    <version>1.1.1</version>
+		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-dbcp2 -->
 		<dependency>
@@ -100,6 +107,13 @@ https://mvnrepository.com/artifact/javax.servlet.jsp/javax.servlet.jsp-api -->
 			<groupId>com.oracle.database.jdbc</groupId>
 			<artifactId>ojdbc10</artifactId>
 			<version>19.21.0.0</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+		<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-databind</artifactId>
+		    <version>2.19.2</version>
 		</dependency>
 		
 	</dependencies>
