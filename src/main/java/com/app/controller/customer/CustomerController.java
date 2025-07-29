@@ -19,6 +19,9 @@ import com.app.dto.user.UserDupCheck;
 import com.app.service.user.UserService;
 import com.app.util.LoginManager;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Controller
 public class CustomerController {
 
@@ -53,7 +56,7 @@ public class CustomerController {
 	public String checkDupId(@RequestBody String data) {  //단순 텍스트
 		System.out.println("/customer/checkDupId");
 		System.out.println(data);
-		
+
 		//처리 로직
 		//클라이언트에서 보낸 데이터가 중복된 사용자 아이디인지 체크
 		boolean result = userService.isDuplicatedId(data);
@@ -62,11 +65,11 @@ public class CustomerController {
 		} else { //중복X
 			return "N"; //2
 		}
-		
+
 		//return "/customer/checkDupId";
 		//return "kkkkkkkkkkkIdCheck";
 	}
-	
+
 	// JSON 포맷으로 통신
 	@ResponseBody
 	@PostMapping("/customer/checkDupIdJson")
@@ -76,35 +79,37 @@ public class CustomerController {
 								//			자동으로 객체형태로 파싱되서 데이터가 담겨진다 
 		System.out.println("/customer/checkDupIdJson");
 		System.out.println(userDupCheck);
+
+		log.info("checkDupIdJson 아이디 중복체크 : {}", userDupCheck);
 		
 		//처리 로직
 		//클라이언트에서 보낸 데이터가 중복된 사용자 아이디인지 체크
 		boolean result = userService.isDuplicatedId(userDupCheck.getId());
-		
-		
+
+
 		ApiResponse<String> apiResponse = new ApiResponse<String>();
-		
+
 		//header
 		ApiResponseHeader header = new ApiResponseHeader();
 		header.setResultCode(ApiCommonCode.API_RESULT_SUCCESS);
 		header.setResultMessage(ApiCommonCode.API_RESULT_SUCCESS_MSG);
-		
+
 		apiResponse.setHeader(header);
-		
+
 		//body
 		if(result) { //중복O
 			apiResponse.setBody("Y");
 		} else { //중복X
 			apiResponse.setBody("N");
 		}
-		
+
 		return apiResponse;  //객체 return -> JSON format 변환 
 		//return "/customer/checkDupId";
 		//return "kkkkkkkkkkkIdCheck";
 	}
-	
-	
-	
+
+
+
 	//@GetMapping("/customer/login")
 	@GetMapping("/customer/signin")
 	public String signin() {
