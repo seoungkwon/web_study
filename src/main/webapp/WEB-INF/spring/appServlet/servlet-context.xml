@@ -56,7 +56,12 @@
 
 	<interceptors>
 		<interceptor>
-			<mapping path="/**"/>
+			<mapping path="/customer/**"/>
+			<exclude-mapping path="/customer/signin"/>
+			<exclude-mapping path="/customer/signup"/>
+			<exclude-mapping path="/customer/checkDupIdJson"/>
+			<beans:bean class="com.app.interceptor.LoginInterceptor"></beans:bean> 
+<!--		<mapping path="/**"/>
 			<exclude-mapping path="/customer/signin"/>
 			<exclude-mapping path="/customer/signup"/>
 			<exclude-mapping path="/customer/checkDupIdJson"/>
@@ -65,10 +70,14 @@
 			<exclude-mapping path="/css/**"/>
 			<exclude-mapping path="/js/**"/>
 			<exclude-mapping path="/image/**"/>
-			<beans:bean class="com.app.interceptor.LoginInterceptor"></beans:bean>
+			<beans:bean class="com.app.interceptor.LoginInterceptor"></beans:bean> -->
 		</interceptor>
-	</interceptors>
+	
 
+		<interceptor>
+			<mapping path="/admin/**"/>
+			<beans:bean class="com.app.interceptor.AdminInterceptor"></beans:bean> 
+		</interceptor>
 
-
+</interceptors>
 </beans:beans>
