@@ -15,16 +15,17 @@ public class AdminInterceptor implements HandlerInterceptor {
 
 	@Autowired
 	UserService userService;
-	
+
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		
+
 		//admin 경로로 시작하는 관리자 페이지에 접속하는 경우
-		
+
 		//로그인O + 로그인한 계정이 관리자 계정(ADM)
 		
-		if(LoginManager.isLogin(request)) { //로그인 되어있다
+		/*
+		if(LoginManager.isLogin(request)) {  //로그인이 되어있다
 			
 			//관리자여부 ADM 이냐?
 			
@@ -38,16 +39,20 @@ public class AdminInterceptor implements HandlerInterceptor {
 				//관리자 계정 맞음
 				return HandlerInterceptor.super.preHandle(request, response, handler);
 			} else {
-				response.sendRedirect("/error/badAccess"); //잘못된 접근이라고 보여주는 화면으로 연결
+				response.sendRedirect("/error/badAccess");  //잘못된 접근이라고 보여주는 화면으로 연결 
 				return false;
 			}
 			
+			
 		} else { //로그인이 안되어있다
 			//response.sendRedirect("/admin/login");
-			response.sendRedirect("/error/badAccess"); //잘못된 접근이라고 보여주는 화면으로 연결
+			response.sendRedirect("/error/badAccess");  //잘못된 접근이라고 보여주는 화면으로 연결 
 			return false;
 		}
 		
-		
+	
+		*/
+		return HandlerInterceptor.super.preHandle(request, response, handler);
+
 	}
 }

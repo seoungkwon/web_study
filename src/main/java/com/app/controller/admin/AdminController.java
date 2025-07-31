@@ -27,7 +27,7 @@ import lombok.extern.slf4j.Slf4j;
 public class AdminController {
 
 	//private static final Logger log = LogManager.getLogger(AdminController.class);
-	
+
 	@Autowired
 	RoomService roomService;
 
@@ -36,21 +36,21 @@ public class AdminController {
 
 	@GetMapping("/admin/registerRoom")
 	public String registerRoom() {
-		
+
 		System.out.println("이것은 println");
 		log.info("이것은 log.info 레벨 기록");
-		
+
 		log.error("로그 log error 기록");
 		log.warn("이것은 경고 warning");
 		log.debug("debug level 로그");
 		log.trace("trace level 로그");
-		
+
 		log.info("집에 들어갔다");
 		log.debug("문을 열고 들어가서, 신발을 벗었다");
 		log.info("손을씻었다");
 		log.debug("핸드워시로 1분동안 깨끗이 닦았다");
 		log.info("침대에 누웠다");
-		
+
 		return "admin/registerRoom";
 	}
 
@@ -66,7 +66,7 @@ public class AdminController {
 
 		if(result > 0) { //정상적으로 저장 성공
 			log.info("registerRoom saveRoom 정보 저장 : {}", room);
-			
+
 			return "redirect:/admin/rooms";	
 		} else { //저장 실패
 			return "admin/registerRoom";	
@@ -165,6 +165,15 @@ public class AdminController {
 
 		System.out.println(user);
 
+		//서버에서 Insert 처리전에 유효성 검증
+		if(user.getId() == null || user.getId().trim() == "") {
+			return "admin/addUser";	
+		}
+		
+		if(user.getId().length() < 2 || user.getId().length() > 15) {
+			return "admin/addUser";
+		}
+		
 		//관리자가 사용자 계정을 추가!!!
 		//사용자 계정이니까 userType "CUS" 여야 한다!! 전제조건! 로직!
 
