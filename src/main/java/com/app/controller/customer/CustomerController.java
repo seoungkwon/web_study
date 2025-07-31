@@ -10,7 +10,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,6 +26,7 @@ import com.app.dto.user.User;
 import com.app.dto.user.UserDupCheck;
 import com.app.service.user.UserService;
 import com.app.util.LoginManager;
+import com.app.validator.UserValidator;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -45,12 +48,11 @@ public class CustomerController {
 
 
 	@PostMapping("/customer/signup")
-//	public String singupAction(User user) {
 	public String singupAction(@Valid @ModelAttribute User user, BindingResult br) {
 								//유효성검사			검사 결과
-		
+
 		//검증 결과에 문제가 있느냐 없느냐
-		
+
 		if(br.hasErrors()) {
 			//문제 내용을 출력
 			List<ObjectError> errorList = br.getAllErrors();
@@ -60,12 +62,12 @@ public class CustomerController {
 				System.out.println(er.getCode());
 				System.out.println(er.getCodes()[0]);
 			}
-			
+
 			//model.addAttribute("user", user);
-			
+
 			return "customer/signup";
 		}
-		
+
 
 		//사용자 회원가입 -> 저장 
 		int result = userService.saveCustomerUser(user);
@@ -77,6 +79,13 @@ public class CustomerController {
 		}
 	}
 
+	
+	@InitBinder("user")
+	public void initUserBinder(WebDataBinder binder) {
+		UserValidator userValidator = new UserValidator();
+		binder.setValidator(userValidator);
+	}
+	
 	@ResponseBody
 	@PostMapping("/customer/checkDupId")
 	public String checkDupId(@RequestBody String data) {  //단순 텍스트
