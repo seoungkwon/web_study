@@ -18,7 +18,6 @@
 	<h1>signup 회원가입 페이지</h1>
 
 	<form action="/customer/signup" method="post">	
-		아이디 : <input type="text" name="id" id="inputId"><br>
 		아이디 : <input type="text" name="id" id="inputId" value="${user.id}"><br>
 		<spring:hasBindErrors name="user">
 			<c:if test="${errors.hasFieldErrors('id')}">
@@ -27,6 +26,10 @@
 			</c:if>			
 		</spring:hasBindErrors>
 
+		<c:if test="${userValidError.id != null}">
+			<p class="error-msg">${userValidError.id}</p>
+		</c:if>
+		
 		<button type="button" id="btn_checkDupId">중복체크</button>
 		<p id="checkDupIdMsg"></p>
 
@@ -39,9 +42,11 @@
 			</c:if>			
 		</spring:hasBindErrors>
 
-		이름 : <input type="text" name="name"><br>
 		
-		
+		<c:if test="${userValidError.pw != null}">
+			<p class="error-msg">${userValidError.pw}</p>
+		</c:if>
+
 		이름 : <input type="text" name="name" value="${user.name}"><br>
 
 		<button type="submit">가입하기</button>
