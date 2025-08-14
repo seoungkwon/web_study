@@ -53,7 +53,7 @@
 
 
 	<select id="findUserListBySearchCondition" resultType="User"  parameterType="UserSearchCondition">
-		
+
 		SELECT *
 		FROM T_USER
 		<where>
@@ -73,8 +73,8 @@
 				AND user_type = #{userType}
 			</if>
 		</where>
-		
-		 
+
+
 <!-- 		SELECT * -->
 <!-- 		FROM T_USER -->
 <!-- 		<where> -->
@@ -84,7 +84,7 @@
 <!-- 						id LIKE '%' || #{searchKeyword} || '%'  -->
 <!-- 					</if> -->
 <!-- 					<if test="name != null and name != ''"> -->
-					
+
 <!-- 						<if test="id != null and id != ''"> -->
 <!-- 							OR name LIKE '%' || #{searchKeyword} || '%' -->
 <!-- 						</if> -->
@@ -98,9 +98,9 @@
 <!-- 				AND user_type = #{userType} -->
 <!-- 			</if> -->
 <!-- 		</where> -->
-		
-		
-		
+
+
+
 <!-- 		SELECT * -->
 <!-- 		FROM T_USER -->
 <!-- 		<where> -->
@@ -114,11 +114,11 @@
 <!-- 				AND user_type = #{userType} -->
 <!-- 			</if> -->
 <!-- 		</where> -->
-		
-		
-		
-		
-		
+
+
+
+
+
 <!-- 		SELECT * -->
 <!-- 		FROM T_USER -->
 <!-- 		WHERE -->
@@ -129,8 +129,8 @@
 <!-- 			<if test="name != null and name != ''"> -->
 <!-- 				OR name LIKE '%' || #{searchKeyword} || '%' -->
 <!-- 			</if> -->
-		
-		
+
+
 <!-- 		SELECT * -->
 <!-- 		FROM T_USER -->
 <!-- 		WHERE -->
@@ -145,6 +145,21 @@
 <!-- 				AND user_type = #{userType} -->
 <!-- 			</if> -->
 	</select>
+
+
+	<insert id="saveUserProfileImage" parameterType="UserProfileImage">
+		INSERT INTO USER_PROFILE_IMAGE
+		VALUES (
+			#{id},
+			#{fileName}
+		)
+	</insert>
 	
+	
+	<select id="findUserProfileImageById" parameterType="String" resultType="UserProfileImage">
+		select *
+		from user_profile_image
+		where id = #{id}
+	</select>
 	
 </mapper>

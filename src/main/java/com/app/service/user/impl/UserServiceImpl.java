@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.app.common.CommonCode;
 import com.app.dao.user.UserDAO;
 import com.app.dto.user.User;
+import com.app.dto.user.UserProfileImage;
 import com.app.dto.user.UserSearchCondition;
 import com.app.dto.user.UserValidError;
 import com.app.service.user.UserService;
@@ -45,10 +46,10 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public int saveCustomerUser(User user) {
 		//사용자 계정 추가 할때 필요한 체크 로직....
-		
+
 		//UserValidError userValidError = new UserValidError();
 		//if(UserCustomValidator.validate(user, userValidError) == false) {
-		
+
 
 		//user.setUserType("CUS");
 		user.setUserType( CommonCode.USER_USERTYPE_CUSTOMER );
@@ -145,5 +146,21 @@ public class UserServiceImpl implements UserService {
 		} else { //아이디 객체가 있다 -> id값이 pk 사용되고 있다 -> 중복 OOO
 			return true;
 		}
+	}
+
+	@Override
+	public int saveUserProfileImage(UserProfileImage userProfileImage) {
+		
+		int result = userDAO.saveUserProfileImage(userProfileImage);
+		
+		return result;
+	}
+
+	@Override
+	public UserProfileImage findUserProfileImageById(String id) {
+
+		UserProfileImage userProfileImage = userDAO.findUserProfileImageById(id);
+		
+		return userProfileImage;
 	}
 }
